@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:stopliteapp/home_widget.dart';
 
 class UserWidget extends StatefulWidget {
   // This widget is the home page of your application. It is stateful, meaning
@@ -17,9 +18,13 @@ class UserWidget extends StatefulWidget {
 }
 
 class _UserWidgetState extends State<UserWidget> {
+  void _navigateToSignUp() {
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (BuildContext context) => HomePage()));
+  }
+
   TextStyle style = TextStyle(fontFamily: 'Ubuntu', fontSize: 20.0);
-  TextStyle defaultStyle = TextStyle(color: Colors.grey, fontSize: 20.0);
-  TextStyle linkStyle = TextStyle(color: Colors.blue);
+
   @override
   Widget build(BuildContext context) {
     final emailField = TextField(
@@ -97,7 +102,7 @@ class _UserWidgetState extends State<UserWidget> {
                                       color: Colors.blueAccent, fontSize: 18),
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
-                                      // navigate to desired screen
+                                      _navigateToSignUp();
                                     })
                             ]),
                       ),

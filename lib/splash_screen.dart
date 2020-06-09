@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:shimmer/shimmer.dart';
-import 'package:stopliteapp/home_widget.dart';
 import 'package:stopliteapp/user_widget.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
