@@ -19,8 +19,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-          //child: Image.asset('images/SLlogoBT.png', height: 100, width: 100),
-          ), // This trailing comma makes auto-formatting nicer for build methods.
+        //child: Image.asset('images/SLlogoBT.png', height: 100, width: 100),
+        child: Text("Hello World"),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

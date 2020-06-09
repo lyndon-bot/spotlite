@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:shimmer/shimmer.dart';
 import 'package:stopliteapp/home_widget.dart';
 import 'package:stopliteapp/user_widget.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -10,14 +11,12 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  /* @override
+  @override
   void initState() {
     super.initState();
 
     _mockCheckForSession().then((status) {
       if (status) {
-        _navigateToHome();
-      } else {
         _navigateToLogin();
       }
     });
@@ -29,50 +28,64 @@ class _SplashScreenState extends State<SplashScreen> {
     return true;
   }
 
-  void _navigateToHome() {
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (BuildContext context) => HomePage()));
-  }
-
   void _navigateToLogin() {
     Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (BuildContext context) => UserWidget()));
   }
-*/
+
+  /// Construct a color from a hex code string, of the format #RRGGBB.
+  Color hexToColor(String code) {
+    return new Color(int.parse(code.substring(1, 7), radix: 16) + 0xFF000000);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Stack(
+        // margin: EdgeInsets.only(left: 120, top: 340, right: 120),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Opacity(
-                opacity: 1,
-                child: Image.asset(
-                  'assets/images/logo.png',
-                  height: 100,
-                  width: 100,
-                )),
-            Shimmer.fromColors(
-              period: Duration(milliseconds: 1500),
-              baseColor: Color(0xff7f00ff),
-              highlightColor: Color(0xffe100ff),
-              child: Container(
-                  padding: EdgeInsets.all(16.0),
-                  child: Center(
-                    child: Text(
-                      "Loading...",
-                      style: TextStyle(
-                          fontSize: 25.0,
-                          fontFamily: 'Ubuntu',
-                          shadows: <Shadow>[
-                            Shadow(
-                                blurRadius: 18.0,
-                                color: Colors.black87,
-                                offset: Offset.fromDirection(120, 12))
-                          ]),
-                    ),
-                  )),
-            )
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Image.asset('assets/images/logo.png', height: 100, width: 320),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(0.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(
+                    child: FadeAnimatedTextKit(
+                        onTap: () {
+                          print("Tap Event");
+                        },
+                        text: [
+                          "Aligning our chakras..",
+                          "Filtering for puns..",
+                          "Last minute cleaning..."
+                        ],
+                        textStyle: TextStyle(
+                            fontSize: 20.0, fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.start,
+                        alignment: AlignmentDirectional
+                            .topStart // or Alignment.topLeft
+                        ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+              ),
+            ),
           ],
         ),
       ),
@@ -80,6 +93,20 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 }
 
+/*
+child: Text(
+                  "Loading Test",
+                  style: TextStyle(
+                      fontSize: 40.0,
+                      fontFamily: 'Ubuntu',
+                      shadows: <Shadow>[
+                        Shadow(
+                            blurRadius: 18.0,
+                            color: Colors.black87,
+                            offset: Offset.fromDirection(120, 12))
+                      ]),
+                ),
+ */
 /*import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
