@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:barcode_scan/barcode_scan.dart';
+import 'package:flutter/services.dart';
+import 'dart:async';
 
 class HomePage extends StatefulWidget {
   // This widget is the home page of your application. It is stateful, meaning
@@ -17,6 +19,35 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String result = "Hey there !";
+
+  Future _scanQR() async {
+    try {
+      String qrResult = await BarcodeScanner.scan();
+      setState(() {
+        result = qrResult;
+      });
+    } on PlatformException catch (ex) {
+      if (ex.code == BarcodeScanner.CameraAccessDenied) {
+        setState(() {
+          result = "Camera permission was denied";
+        });
+      } else {
+        setState(() {
+          result = "Unkown Error $ex";
+        });
+      }
+    } on FormatException {
+      setState(() {
+        result = "You Pressed the back button before anything";
+      });
+    } catch (ex) {
+      setState(() {
+        result = "Unkown Error $ex";
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,13 +80,17 @@ class _HomePageState extends State<HomePage> {
         elevation: 0,
       ),
       body: Center(
-          //child: Image.asset('images/SLlogoB]T.png', height: 100, width: 100),
-          /* child: QrImage(
-          data: "1234567890",
-          version: QrVersions.auto,
-          size: 200.0,
-        ),*/
-          ),
+        child: Text(
+          result,
+          style: new TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        icon: Icon(Icons.camera_alt),
+        label: Text("Scan"),
+        onPressed: _scanQR,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: false,
