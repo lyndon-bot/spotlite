@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:stopliteapp/sign_up.dart';
 import 'package:stopliteapp/home_widget.dart';
 
-class UserWidget extends StatefulWidget {
+class Login extends StatefulWidget {
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
   // how it looks.
@@ -14,11 +15,16 @@ class UserWidget extends StatefulWidget {
   // always marked "final".
 
   @override
-  _UserWidgetState createState() => _UserWidgetState();
+  _LoginState createState() => _LoginState();
 }
 
-class _UserWidgetState extends State<UserWidget> {
+class _LoginState extends State<Login> {
   void _navigateToSignUp() {
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (BuildContext context) => SignUpPage()));
+  }
+
+  void _navigateToHome() {
     Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (BuildContext context) => HomePage()));
   }
@@ -52,7 +58,9 @@ class _UserWidgetState extends State<UserWidget> {
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        onPressed: () {},
+        onPressed: () {
+          _navigateToHome();
+        },
         child: Text("Login",
             textAlign: TextAlign.center,
             style: style.copyWith(

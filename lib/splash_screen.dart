@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:shimmer/shimmer.dart';
-import 'package:stopliteapp/user_widget.dart';
+import 'package:stopliteapp/login.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void _navigateToLogin() {
     Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (BuildContext context) => UserWidget()));
+        MaterialPageRoute(builder: (BuildContext context) => Login()));
   }
 
   /// Construct a color from a hex code string, of the format #RRGGBB.
