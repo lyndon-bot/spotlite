@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "369066619070",
+    "firebase_url": "https://stopliteapp-3e891.firebaseio.com",
+    "project_id": "stopliteapp-3e891",
+    "storage_bucket": "stopliteapp-3e891.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:369066619070:android:f8bbb83ca03a950f80eeef",
+        "android_client_info": {
+          "package_name": "stoplite.stopliteapp3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "369066619070-0e8vjscjo3u0m4kqgloeij3nb5g1em2v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "stoplite.stopliteapp3",
+            "certificate_hash": "ad3ffb873f7e7b7784724dc5b3257401ad51eae5"
+          }
+        },
+        {
+          "client_id": "369066619070-5sikk9kq9te4duhbft19ov2sa5m0nmvk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBavQIFy7cyKvKCh3asxbSm7D8iSxRQDME"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "369066619070-5sikk9kq9te4duhbft19ov2sa5m0nmvk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

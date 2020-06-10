@@ -4,6 +4,8 @@ import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
 
+import 'package:stopliteapp/services/auth.dart';
+
 class HomePage extends StatefulWidget {
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -19,6 +21,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final AuthService _auth = AuthService();
+
   String result = "Hey there !";
 
   Future _scanQR() async {
@@ -69,10 +73,11 @@ class _HomePageState extends State<HomePage> {
               child: Text('AH'),
             ),
             IconButton(
-              icon: Icon(Icons.more_vert),
-              // onPressed: () {
-              //  _select(choices[0]);
-              // },
+              icon: Icon(Icons.exit_to_app),
+              color: Colors.grey,
+              onPressed: () async {
+                await _auth.signOut();
+              },
             ),
           ],
         ),
