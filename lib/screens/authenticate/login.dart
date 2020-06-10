@@ -15,32 +15,28 @@ class Login extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
+  final Function toggleView;
+  Login({this.toggleView});
+
   @override
   _LoginState createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
   final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
+  String error = '';
 
   //Text field State
   String email = '';
   String password = '';
-
-  void _navigateToSignUp() {
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (BuildContext context) => SignUpPage()));
-  }
-
-  void _navigateToHome() {
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (BuildContext context) => HomePage()));
-  }
 
   TextStyle style = TextStyle(fontFamily: 'Ubuntu', fontSize: 20.0);
 
   @override
   Widget build(BuildContext context) {
     final emailField = TextFormField(
+      validator: (val) => val.isEmpty ? 'Enter an email' : null,
       onChanged: (val) {
         setState(() => email = val);
       },
@@ -52,7 +48,9 @@ class _LoginState extends State<Login> {
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
-    final passwordField = TextField(
+    final passwordField = TextFormField(
+      validator: (val) =>
+          val.length < 6 ? 'Enter a password 6+ chars long' : null,
       onChanged: (val) {
         setState(() => password = val);
       },
@@ -72,12 +70,14 @@ class _LoginState extends State<Login> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () async {
-          dynamic result = await _auth.signInAnon();
-          if (result == null) {
-            print('error signing in ');
-          } else {
-            print('signed in');
-            print(result.uid);
+          if (_formKey.currentState.validate()) {
+            dynamic result =
+                await _auth.signInWithEmailAndPassword(email, password);
+            if (result == null) {
+              setState(() {
+                error = 'Could not sign in with those credentials';
+              });
+            }
           }
         },
         child: Text("Login",
@@ -89,6 +89,7 @@ class _LoginState extends State<Login> {
 
     return Scaffold(
       body: Form(
+        key: _formKey,
         child: Center(
           child: Container(
             color: Colors.white,
@@ -131,7 +132,7 @@ class _LoginState extends State<Login> {
                                         color: Colors.blueAccent, fontSize: 18),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
-                                        _navigateToSignUp();
+                                        widget.toggleView();
                                       })
                               ]),
                         ),

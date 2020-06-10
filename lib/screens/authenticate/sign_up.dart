@@ -13,6 +13,8 @@ class SignUpPage extends StatefulWidget {
   // case the title) provided by the parent (in this case the App widget) and
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
+  final Function toggleView;
+  SignUpPage({this.toggleView});
 
   @override
   _SignUpPageState createState() => _SignUpPageState();
@@ -27,16 +29,6 @@ class _SignUpPageState extends State<SignUpPage> {
   String password = '';
   String cpassword = '';
   String error = '';
-
-  void _navigateToLogin() {
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (BuildContext context) => Login()));
-  }
-
-  void _navigateToHome() {
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (BuildContext context) => HomePage()));
-  }
 
   TextStyle style = TextStyle(fontFamily: 'Ubuntu', fontSize: 20.0);
 
@@ -104,8 +96,11 @@ class _SignUpPageState extends State<SignUpPage> {
           if (_formKey.currentState.validate()) {
             dynamic result =
                 await _auth.registerWithEmailAndPassword(email, password);
+            print(result);
             if (result == null) {
-              setState(() => error = 'please supply a valid email');
+              setState(() {
+                error = 'please supply a valid email';
+              });
             }
           }
         },
@@ -117,64 +112,67 @@ class _SignUpPageState extends State<SignUpPage> {
     );
 
     return Scaffold(
-      body: Form(
-        key: _formKey,
-        child: Center(
-          child: Container(
-            color: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.all(36.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(
-                    height: 155.0,
-                    child: Image.asset(
-                      "assets/images/logo.png",
-                      fit: BoxFit.contain,
+      body: Container(
+        child: Form(
+          key: _formKey,
+          child: Center(
+            child: Container(
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.all(36.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 155.0,
+                      child: Image.asset(
+                        "assets/images/logo.png",
+                        fit: BoxFit.contain,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 25.0),
-                  //UsernameField,
-                  SizedBox(height: 25.0),
-                  emailField,
-                  SizedBox(height: 25.0),
-                  passwordField,
-                  SizedBox(height: 25.0),
-                  //cPasswordField,
-                  SizedBox(
-                    height: 30.0,
-                  ),
-                  loginButon,
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                  Text(
-                    error,
-                    style: TextStyle(color: Colors.red, fontSize: 14.0),
-                  ),
-                  Container(
-                      padding: EdgeInsets.all(10),
-                      child: Center(
-                        child: RichText(
-                          text: TextSpan(
-                              text: 'Already have an account?',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 18),
-                              children: <TextSpan>[
-                                TextSpan(
-                                    text: ' Login ',
-                                    style: TextStyle(
-                                        color: Colors.blueAccent, fontSize: 18),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        _navigateToLogin();
-                                      })
-                              ]),
-                        ),
-                      ))
-                ],
+                    SizedBox(height: 25.0),
+                    //UsernameField,
+                    SizedBox(height: 25.0),
+                    emailField,
+                    SizedBox(height: 25.0),
+                    passwordField,
+                    SizedBox(height: 25.0),
+                    //cPasswordField,
+                    SizedBox(
+                      height: 30.0,
+                    ),
+                    loginButon,
+                    SizedBox(
+                      height: 15.0,
+                    ),
+                    Text(
+                      error,
+                      style: TextStyle(color: Colors.red, fontSize: 14.0),
+                    ),
+                    Container(
+                        padding: EdgeInsets.all(10),
+                        child: Center(
+                          child: RichText(
+                            text: TextSpan(
+                                text: 'Already have an account?',
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 18),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                      text: ' Login ',
+                                      style: TextStyle(
+                                          color: Colors.blueAccent,
+                                          fontSize: 18),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          widget.toggleView();
+                                        })
+                                ]),
+                          ),
+                        ))
+                  ],
+                ),
               ),
             ),
           ),
