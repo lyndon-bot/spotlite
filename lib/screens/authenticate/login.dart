@@ -4,6 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:stopliteapp/screens/authenticate/sign_up.dart';
 import 'file:///C:/Users/lyndon%20bowen/AndroidStudioProjects/stopliteapp/lib/screens/home/home_widget.dart';
 import 'package:stopliteapp/services/auth.dart';
+import 'package:stopliteapp/shared/loading.dart';
 
 class Login extends StatefulWidget {
   // This widget is the home page of your application. It is stateful, meaning
@@ -25,6 +26,8 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
+
   String error = '';
 
   //Text field State
@@ -71,11 +74,15 @@ class _LoginState extends State<Login> {
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () async {
           if (_formKey.currentState.validate()) {
+            setState(() {
+              loading = true;
+            });
             dynamic result =
                 await _auth.signInWithEmailAndPassword(email, password);
             if (result == null) {
               setState(() {
                 error = 'Could not sign in with those credentials';
+                loading = false;
               });
             }
           }
@@ -87,62 +94,65 @@ class _LoginState extends State<Login> {
       ),
     );
 
-    return Scaffold(
-      body: Form(
-        key: _formKey,
-        child: Center(
-          child: Container(
-            color: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.all(36.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(
-                    height: 155.0,
-                    child: Image.asset(
-                      "assets/images/logo.png",
-                      fit: BoxFit.contain,
+    return loading
+        ? Loading()
+        : Scaffold(
+            body: Form(
+              key: _formKey,
+              child: Center(
+                child: Container(
+                  color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.all(36.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 155.0,
+                          child: Image.asset(
+                            "assets/images/logo.png",
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                        SizedBox(height: 45.0),
+                        emailField,
+                        SizedBox(height: 25.0),
+                        passwordField,
+                        SizedBox(
+                          height: 35.0,
+                        ),
+                        loginButon,
+                        SizedBox(
+                          height: 15.0,
+                        ),
+                        Container(
+                            padding: EdgeInsets.all(10),
+                            child: Center(
+                              child: RichText(
+                                text: TextSpan(
+                                    text: 'Don\'t have an account?',
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 18),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                          text: ' Sign up',
+                                          style: TextStyle(
+                                              color: Colors.blueAccent,
+                                              fontSize: 18),
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () {
+                                              widget.toggleView();
+                                            })
+                                    ]),
+                              ),
+                            ))
+                      ],
                     ),
                   ),
-                  SizedBox(height: 45.0),
-                  emailField,
-                  SizedBox(height: 25.0),
-                  passwordField,
-                  SizedBox(
-                    height: 35.0,
-                  ),
-                  loginButon,
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                  Container(
-                      padding: EdgeInsets.all(10),
-                      child: Center(
-                        child: RichText(
-                          text: TextSpan(
-                              text: 'Don\'t have an account?',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 18),
-                              children: <TextSpan>[
-                                TextSpan(
-                                    text: ' Sign up',
-                                    style: TextStyle(
-                                        color: Colors.blueAccent, fontSize: 18),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        widget.toggleView();
-                                      })
-                              ]),
-                        ),
-                      ))
-                ],
+                ),
               ),
             ),
-          ),
-        ),
-      ),
-    );
+          );
   }
 }

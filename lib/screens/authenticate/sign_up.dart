@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'file:///C:/Users/lyndon%20bowen/AndroidStudioProjects/stopliteapp/lib/screens/authenticate/login.dart';
 import 'file:///C:/Users/lyndon%20bowen/AndroidStudioProjects/stopliteapp/lib/screens/home/home_widget.dart';
 import 'package:stopliteapp/services/auth.dart';
+import 'package:stopliteapp/shared/loading.dart';
 
 class SignUpPage extends StatefulWidget {
   // This widget is the home page of your application. It is stateful, meaning
@@ -23,6 +24,7 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   String username = '';
   String email = '';
@@ -94,12 +96,16 @@ class _SignUpPageState extends State<SignUpPage> {
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () async {
           if (_formKey.currentState.validate()) {
+            setState(() {
+              loading = true;
+            });
             dynamic result =
                 await _auth.registerWithEmailAndPassword(email, password);
             print(result);
             if (result == null) {
               setState(() {
                 error = 'please supply a valid email';
+                loading = false;
               });
             }
           }
@@ -111,73 +117,75 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
 
-    return Scaffold(
-      body: Container(
-        child: Form(
-          key: _formKey,
-          child: Center(
-            child: Container(
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(36.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 155.0,
-                      child: Image.asset(
-                        "assets/images/logo.png",
-                        fit: BoxFit.contain,
+    return loading
+        ? Loading()
+        : Scaffold(
+            body: Container(
+              child: Form(
+                key: _formKey,
+                child: Center(
+                  child: Container(
+                    color: Colors.white,
+                    child: Padding(
+                      padding: const EdgeInsets.all(36.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          SizedBox(
+                            height: 155.0,
+                            child: Image.asset(
+                              "assets/images/logo.png",
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                          SizedBox(height: 25.0),
+                          //UsernameField,
+                          SizedBox(height: 25.0),
+                          emailField,
+                          SizedBox(height: 25.0),
+                          passwordField,
+                          SizedBox(height: 25.0),
+                          //cPasswordField,
+                          SizedBox(
+                            height: 30.0,
+                          ),
+                          loginButon,
+                          SizedBox(
+                            height: 15.0,
+                          ),
+                          Text(
+                            error,
+                            style: TextStyle(color: Colors.red, fontSize: 14.0),
+                          ),
+                          Container(
+                              padding: EdgeInsets.all(10),
+                              child: Center(
+                                child: RichText(
+                                  text: TextSpan(
+                                      text: 'Already have an account?',
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 18),
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                            text: ' Login ',
+                                            style: TextStyle(
+                                                color: Colors.blueAccent,
+                                                fontSize: 18),
+                                            recognizer: TapGestureRecognizer()
+                                              ..onTap = () {
+                                                widget.toggleView();
+                                              })
+                                      ]),
+                                ),
+                              ))
+                        ],
                       ),
                     ),
-                    SizedBox(height: 25.0),
-                    //UsernameField,
-                    SizedBox(height: 25.0),
-                    emailField,
-                    SizedBox(height: 25.0),
-                    passwordField,
-                    SizedBox(height: 25.0),
-                    //cPasswordField,
-                    SizedBox(
-                      height: 30.0,
-                    ),
-                    loginButon,
-                    SizedBox(
-                      height: 15.0,
-                    ),
-                    Text(
-                      error,
-                      style: TextStyle(color: Colors.red, fontSize: 14.0),
-                    ),
-                    Container(
-                        padding: EdgeInsets.all(10),
-                        child: Center(
-                          child: RichText(
-                            text: TextSpan(
-                                text: 'Already have an account?',
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 18),
-                                children: <TextSpan>[
-                                  TextSpan(
-                                      text: ' Login ',
-                                      style: TextStyle(
-                                          color: Colors.blueAccent,
-                                          fontSize: 18),
-                                      recognizer: TapGestureRecognizer()
-                                        ..onTap = () {
-                                          widget.toggleView();
-                                        })
-                                ]),
-                          ),
-                        ))
-                  ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
-      ),
-    );
+          );
   }
 }

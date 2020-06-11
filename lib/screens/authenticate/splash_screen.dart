@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:shimmer/shimmer.dart';
 import 'file:///C:/Users/lyndon%20bowen/AndroidStudioProjects/stopliteapp/lib/screens/authenticate/login.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:stopliteapp/screens/wrapper.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -16,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     _mockCheckForSession().then((status) {
       if (status) {
-        _navigateToLogin();
+        _navigateToWrapper();
       }
     });
   }
@@ -27,14 +28,9 @@ class _SplashScreenState extends State<SplashScreen> {
     return true;
   }
 
-  void _navigateToLogin() {
+  void _navigateToWrapper() {
     Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (BuildContext context) => Login()));
-  }
-
-  /// Construct a color from a hex code string, of the format #RRGGBB.
-  Color hexToColor(String code) {
-    return new Color(int.parse(code.substring(1, 7), radix: 16) + 0xFF000000);
+        MaterialPageRoute(builder: (BuildContext context) => Wrapper()));
   }
 
   @override

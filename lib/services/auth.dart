@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stopliteapp/models/user.dart';
+import 'package:stopliteapp/services/database.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -46,6 +47,10 @@ class AuthService {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email.trim(), password: password);
       FirebaseUser user = result.user;
+
+      //create a new document for user with the uid
+      await DatabaseService(uid: user.uid)
+          .updateUserData('0', 'new member', 100);
       return _userFromFireBaseUser(user);
     } catch (error) {
       print(error.toString());
