@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
+import 'package:stopliteapp/models/stoplite.dart';
 
 class StopliteList extends StatefulWidget {
   @override
@@ -10,11 +10,20 @@ class StopliteList extends StatefulWidget {
 class _StopliteListState extends State<StopliteList> {
   @override
   Widget build(BuildContext context) {
-    final Stoplites = Provider.of<QuerySnapshot>(context);
-    //print(Stoplites.documents);
-    for (var doc in Stoplites.documents) {
-      print(doc.data);
-    }
-    return Container();
+
+    /*final Stoplites = Provider.of<List<Stoplite>>(context);
+     Stoplites.forEach((stoplite) {
+       print(stoplite.name);
+       print(stoplite.sugars);
+       print(stoplite.strength);
+     });*/
+
+
+    return ListView.builder(
+      itemCount: Stoplites.length,
+      itemBuilder: (context,index) {
+       return StopliteTile(stoplite: Stoplites[index]);
+      },
+    );
   }
 }

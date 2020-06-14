@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:barcode_scan/barcode_scan.dart';
@@ -7,6 +7,7 @@ import 'dart:async';
 import 'package:stopliteapp/services/database.dart';
 import 'package:stopliteapp/services/auth.dart';
 import 'package:provider/provider.dart';
+import 'package:stopliteapp/models/stoplite.dart';
 import 'package:stopliteapp/screens/home/stoplite_list.dart';
 
 class HomePage extends StatefulWidget {
@@ -57,7 +58,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<QuerySnapshot>.value(
+    return StreamProvider<List<Stoplite>>.value(
       value: DatabaseService().Stoplites,
       child: Scaffold(
         appBar: AppBar(
