@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import 'file:///C:/Users/lyndon%20bowen/AndroidStudioProjects/stopliteapp/lib/screens/authenticate/login.dart';
-import 'file:///C:/Users/lyndon%20bowen/AndroidStudioProjects/stopliteapp/lib/screens/home/home_widget.dart';
+//import 'file:///C:/Users/lyndon%20bowen/AndroidStudioProjects/stopliteapp/lib/screens/authenticate/login.dart';
+import '..//authenticate/login.dart';
+//import 'file:///C:/Users/lyndon%20bowen/AndroidStudioProjects/stopliteapp/lib/screens/home/home_widget.dart';
+import '../home/home_widget.dart'; // relative import?
 import 'package:stopliteapp/services/auth.dart';
 import 'package:stopliteapp/shared/loading.dart';
 
