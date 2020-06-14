@@ -1,10 +1,22 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stopliteapp/models/user.dart';
 import 'package:stopliteapp/services/database.dart';
+import 'package:flutter/material.dart';
+
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+
+////
+//test//
+   void inputData() async{
+    final FirebaseUser user = await _auth.currentUser();
+    final uid = user.uid;
+    // input the data into firestore???
+  }
+
+  ////
   //create user object based on fb user
 
   User _userFromFireBaseUser(FirebaseUser user) {
@@ -15,8 +27,35 @@ class AuthService {
   Stream<User> get user {
     return _auth.onAuthStateChanged.map(_userFromFireBaseUser);
   }
-  // sign in anon
 
+////////////////////////////
+  //more test
+  //
+  Stream <String> get onAuthStateChanged =>
+  _auth.onAuthStateChanged.map(
+      (FirebaseUser user) => user?.uid,
+  );
+
+  ///GET User ID
+  Future<String> getCurrentUID()async{
+    return(await _auth.currentUser()).uid;
+  }
+// GET CURRENT USER
+  Future getCurrentUser() async{
+    return await _auth.currentUser();
+  }
+//
+//  Future updateUserName(String name, FirebaseUser currentUser) async{
+//    var userUpdateInfo = UserUpdateInfo();
+//    userUpdateInfo.displayName = name;
+//    await currentUser.updateProfile(userUpdateInfo);
+//    await currentUser.reload();
+//  }
+//
+
+  ///////////////////////
+
+  // sign in anon
   Future signInAnon() async {
     try {
       AuthResult result = await _auth.signInAnonymously();

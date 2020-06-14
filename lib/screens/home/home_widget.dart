@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 //import 'package:qr_flutter/qr_flutter.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
+import 'package:stopliteapp/screens/home/profile_view.dart';
 import 'dart:async';
 import 'package:stopliteapp/services/database.dart';
 import 'package:stopliteapp/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:stopliteapp/models/stoplite.dart';
 import 'package:stopliteapp/screens/home/stoplite_list.dart';
+import 'package:stopliteapp/screens/home/profile_view.dart';
 
 class HomePage extends StatefulWidget {
   // This widget is the home page of your application. It is stateful, meaning
@@ -84,7 +86,17 @@ class _HomePageState extends State<HomePage> {
                   await _auth.signOut();
                 },
               ),
+              IconButton(
+                icon: Icon(Icons.account_circle),
+                highlightColor: Colors.pink,
+                onPressed: () {Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfileView()),
+                );
+                }
+              )
             ],
+
           ),
           backgroundColor: Colors.transparent,
           elevation: 0,
