@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
-import 'package:qr_flutter/qr_flutter.dart';
+//import 'package:qr_flutter/qr_flutter.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
@@ -59,7 +58,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<Stoplite>>.value(
-      value: DatabaseService().Stoplites,
+      value: DatabaseService().stoplites,
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -70,9 +69,9 @@ class _HomePageState extends State<HomePage> {
             children: <Widget>[
               IconButton(
                 icon: Icon(Icons.add),
-                // onPressed: () {
-                //  _select(choices[0]);
-                // },
+                onPressed: () {
+                  //  _select(choices[0]);
+                },
               ),
               CircleAvatar(
                 backgroundColor: Colors.brown.shade800,

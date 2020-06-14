@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:shimmer/shimmer.dart';
-import 'package:stopliteapp/screens/authenticate/login.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:stopliteapp/screens/wrapper.dart';
 

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stopliteapp/screens/authenticate/splash_screen.dart';
 import 'package:stopliteapp/services/auth.dart';
-import 'package:stopliteapp/screens/wrapper.dart';
 import 'package:stopliteapp/models/user.dart';
 
 void main() {

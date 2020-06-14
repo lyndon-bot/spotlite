@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stopliteapp/models/stoplite.dart';
+import 'package:stopliteapp/screens/home/stoplite_tile.dart';
 
 class StopliteList extends StatefulWidget {
   @override
@@ -10,19 +11,12 @@ class StopliteList extends StatefulWidget {
 class _StopliteListState extends State<StopliteList> {
   @override
   Widget build(BuildContext context) {
-
-    /*final Stoplites = Provider.of<List<Stoplite>>(context);
-     Stoplites.forEach((stoplite) {
-       print(stoplite.name);
-       print(stoplite.sugars);
-       print(stoplite.strength);
-     });*/
-
+    final stoplites = Provider.of<List<Stoplite>>(context);
 
     return ListView.builder(
-      itemCount: Stoplites.length,
-      itemBuilder: (context,index) {
-       return StopliteTile(stoplite: Stoplites[index]);
+      itemCount: stoplites.length,
+      itemBuilder: (context, index) {
+        return StopliteTile(stoplite: stoplites[index]);
       },
     );
   }

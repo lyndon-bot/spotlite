@@ -6,11 +6,11 @@ class DatabaseService {
   final String uid;
   DatabaseService({this.uid});
 
-  final CollectionReference StopLiteCollection =
+  final CollectionReference stopLiteCollection =
       Firestore.instance.collection('Stoplites');
 
   Future updateUserData(String sugars, String name, int strength) async {
-    return await StopLiteCollection.document(uid).setData({
+    return await stopLiteCollection.document(uid).setData({
       'sugars': sugars,
       'name': name,
       'strength': strength,
@@ -19,18 +19,16 @@ class DatabaseService {
 
   //stoplite list from snapshot
   List<Stoplite> _stopliteListFromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.documents.map((doc){
+    return snapshot.documents.map((doc) {
       return Stoplite(
-        name: doc.data['name'] ?? '',
-        strength: doc.data['strength'] ?? 0,
-        sugars: doc.data['sugars'] ?? '0'
-      );
+          name: doc.data['name'] ?? '',
+          strength: doc.data['strength'] ?? 0,
+          sugars: doc.data['sugars'] ?? '0');
     }).toList();
   }
   // get stoplite stream
 
-  Stream<List<Stoplite>> get Stoplites {
-    return StopLiteCollection.snapshots()
-    .map(_stopliteListFromSnapshot);
+  Stream<List<Stoplite>> get stoplites {
+    return stopLiteCollection.snapshots().map(_stopliteListFromSnapshot);
   }
 }

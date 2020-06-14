@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import 'package:stopliteapp/screens/authenticate/login.dart';
-import 'package:stopliteapp/screens/home/home_widget.dart';
 import 'package:stopliteapp/services/auth.dart';
 import 'package:stopliteapp/shared/loading.dart';
 
@@ -36,7 +34,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    final UsernameField = TextFormField(
+    /*final UsernameField = TextFormField(
       onChanged: (val) {
         setState(() => username = val);
       },
@@ -47,7 +45,7 @@ class _SignUpPageState extends State<SignUpPage> {
           hintText: "Username",
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-    );
+    );*/
     final emailField = TextFormField(
       validator: (val) => val.isEmpty ? 'enter an email' : null,
       onChanged: (val) {
@@ -75,7 +73,7 @@ class _SignUpPageState extends State<SignUpPage> {
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
-    final cPasswordField = TextFormField(
+    /*final cPasswordField = TextFormField(
       onChanged: (val) {
         setState(() => cpassword = val);
       },
@@ -86,7 +84,7 @@ class _SignUpPageState extends State<SignUpPage> {
           hintText: "Confirm Password",
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-    );
+    );*/
     final loginButon = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),

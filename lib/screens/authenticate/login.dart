@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import 'package:stopliteapp/screens/authenticate/sign_up.dart';
-import 'package:stopliteapp/screens/home/home_widget.dart';
 import 'package:stopliteapp/services/auth.dart';
 import 'package:stopliteapp/shared/loading.dart';
 

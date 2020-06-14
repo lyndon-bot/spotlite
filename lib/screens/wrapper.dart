@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stopliteapp/models/user.dart';
 import 'package:stopliteapp/screens/home/home_widget.dart';
-import 'authenticate/login.dart';
 import 'package:stopliteapp/screens/authenticate/authenticate.dart';
 
 class Wrapper extends StatelessWidget {
