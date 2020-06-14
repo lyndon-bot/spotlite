@@ -44,6 +44,7 @@ class AuthService {
   Future getCurrentUser() async{
     return await _auth.currentUser();
   }
+  //ex
 //
 //  Future updateUserName(String name, FirebaseUser currentUser) async{
 //    var userUpdateInfo = UserUpdateInfo();
