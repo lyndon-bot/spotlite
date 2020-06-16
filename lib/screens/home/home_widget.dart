@@ -70,9 +70,10 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               IconButton(
-                icon: Icon(Icons.add),
+                icon: Icon(Icons.center_focus_weak),
+                color: Colors.grey,
                 onPressed: () {
-                  //  _select(choices[0]);
+                  _scanQR();
                 },
               ),
               CircleAvatar(
@@ -87,16 +88,16 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               IconButton(
-                icon: Icon(Icons.account_circle),
-                highlightColor: Colors.pink,
-                onPressed: () {Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ProfileView()),
-                );
-                }
-              )
+                  icon: Icon(Icons.notification_important),
+                  color: Colors.grey,
+                  highlightColor: Colors.pink,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ProfileView()),
+                    );
+                  })
             ],
-
           ),
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -104,12 +105,6 @@ class _HomePageState extends State<HomePage> {
         body: Center(
           child: StopliteList(),
         ),
-        floatingActionButton: FloatingActionButton.extended(
-          icon: Icon(Icons.camera_alt),
-          label: Text("Scan"),
-          onPressed: _scanQR,
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           showSelectedLabels: false,
@@ -117,19 +112,19 @@ class _HomePageState extends State<HomePage> {
           //currentIndex: 0, // this will be set when a new tab is tapped
           items: [
             BottomNavigationBarItem(
-              icon: new Icon(Icons.insert_chart),
+              icon: new Icon(Icons.home),
               title: new Text('Home'),
             ),
             BottomNavigationBarItem(
-              icon: new Icon(Icons.shopping_cart),
+              icon: new Icon(Icons.store),
               title: new Text('Messages'),
             ),
             BottomNavigationBarItem(
-              icon: new Icon(Icons.help_outline),
+              icon: new Icon(Icons.library_books),
               title: new Text('Profile'),
             ),
             BottomNavigationBarItem(
-              icon: new Icon(Icons.notification_important),
+              icon: new Icon(Icons.account_circle),
               title: new Text('Messages'),
             ),
           ],
