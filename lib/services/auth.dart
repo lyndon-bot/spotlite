@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stopliteapp/models/user.dart';
 import 'package:stopliteapp/services/database.dart';
@@ -41,10 +42,11 @@ class AuthService {
     return(await _auth.currentUser()).uid;
   }
 // GET CURRENT USER
+
   Future getCurrentUser() async{
     return await _auth.currentUser();
   }
-  //ex
+
 //
 //  Future updateUserName(String name, FirebaseUser currentUser) async{
 //    var userUpdateInfo = UserUpdateInfo();
@@ -53,6 +55,8 @@ class AuthService {
 //    await currentUser.reload();
 //  }
 //
+
+
 
   ///////////////////////
 
