@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 //import 'package:qr_flutter/qr_flutter.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
+import 'package:stopliteapp/models/user.dart';
 import 'package:stopliteapp/screens/home/profile_view.dart';
 import 'dart:async';
 import 'package:stopliteapp/services/database.dart';
@@ -26,6 +27,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int _selectedTabIndex = 0;
+  List _pages = [
+    Text("Home"),
+    //StopliteList(),
+    Text("Store"),
+    Text("Info"),
+    ProfileView(),
+  ];
+
+  _changeIndex(int index) {
+    setState(() {
+      _selectedTabIndex = index;
+    });
+  }
+
   final AuthService _auth = AuthService();
 
   String result = "Hey there !";
@@ -35,6 +51,8 @@ class _HomePageState extends State<HomePage> {
       String qrResult = await BarcodeScanner.scan();
       setState(() {
         result = qrResult;
+
+        DatabaseService().getUserData(result);
       });
     } on PlatformException catch (ex) {
       if (ex.code == BarcodeScanner.CameraAccessDenied) {
@@ -90,7 +108,7 @@ class _HomePageState extends State<HomePage> {
               IconButton(
                   icon: Icon(Icons.notification_important),
                   color: Colors.grey,
-                  highlightColor: Colors.pink,
+                  //highlightColor: Colors.pink,
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -103,9 +121,12 @@ class _HomePageState extends State<HomePage> {
           elevation: 0,
         ),
         body: Center(
-          child: StopliteList(),
+          //child: StopliteList(),
+          child: _pages[_selectedTabIndex],
         ),
         bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _selectedTabIndex,
+          onTap: _changeIndex,
           type: BottomNavigationBarType.fixed,
           showSelectedLabels: false,
           showUnselectedLabels: false,

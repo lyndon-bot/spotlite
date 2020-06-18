@@ -1,49 +1,45 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stopliteapp/models/user.dart';
 import 'package:stopliteapp/services/database.dart';
-import 'package:flutter/material.dart';
-
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-
 ////
 //test//
-   void inputData() async{
+/* void inputData() async {
     final FirebaseUser user = await _auth.currentUser();
     final uid = user.uid;
     // input the data into firestore???
   }
-
+*/
   ////
   //create user object based on fb user
 
   User _userFromFireBaseUser(FirebaseUser user) {
     return user != null ? User(uid: user.uid) : null;
   }
-  // auth change use stream
+  // auth change user stream
 
   Stream<User> get user {
     return _auth.onAuthStateChanged.map(_userFromFireBaseUser);
   }
 
-////////////////////////////
   //more test
   //
-  Stream <String> get onAuthStateChanged =>
-  _auth.onAuthStateChanged.map(
-      (FirebaseUser user) => user?.uid,
-  );
+  /*Stream<String> get onAuthStateChanged => _auth.onAuthStateChanged.map(
+        (FirebaseUser user) => user?.uid,
+      );*/
 
-  ///GET User ID
-  Future<String> getCurrentUID()async{
-    return(await _auth.currentUser()).uid;
+  /* ///GET User ID
+  Future<String> getCurrentUID() async {
+    return (await _auth.currentUser()).uid;
   }
+
 // GET CURRENT USER
-  Future getCurrentUser() async{
+  Future getCurrentUser() async {
     return await _auth.currentUser();
-  }
+  }*/
   //ex
 //
 //  Future updateUserName(String name, FirebaseUser currentUser) async{
@@ -89,8 +85,7 @@ class AuthService {
       FirebaseUser user = result.user;
 
       //create a new document for user with the uid
-      await DatabaseService(uid: user.uid)
-          .updateUserData('0', 'new member', 100);
+      await DatabaseService(uid: user.uid).updateUserData();
       return _userFromFireBaseUser(user);
     } catch (error) {
       print(error.toString());
