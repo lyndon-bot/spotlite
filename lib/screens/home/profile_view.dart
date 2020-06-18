@@ -19,8 +19,6 @@ class ProfileView extends StatelessWidget{
             return Column(
 
               children: <Widget>[
-
-
               Text('username: ' + snapshot.data.documents[0]['name'],style: new TextStyle(fontSize: 15.0), textAlign: TextAlign.center),
               Text('strength: ' + snapshot.data.documents[0]['strength'].toString(), style: new TextStyle(fontSize: 15.0), textAlign: TextAlign.center),
               FutureBuilder(
