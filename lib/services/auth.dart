@@ -5,10 +5,9 @@ import 'package:stopliteapp/services/database.dart';
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-
 ////
 //test//
-   void inputData() async{
+  void inputData() async {
     final FirebaseUser user = await _auth.currentUser();
     final uid = user.uid;
     // input the data into firestore???
@@ -29,19 +28,18 @@ class AuthService {
 ////////////////////////////
   //more test
   //
-  Stream <String> get onAuthStateChanged =>
-  _auth.onAuthStateChanged.map(
-      (FirebaseUser user) => user?.uid,
-  );
+  Stream<String> get onAuthStateChanged => _auth.onAuthStateChanged.map(
+        (FirebaseUser user) => user?.uid,
+      );
 
   ///GET User ID
-  Future<String> getCurrentUID()async{
-    return(await _auth.currentUser()).uid;
+  Future<String> getCurrentUID() async {
+    return (await _auth.currentUser()).uid;
   }
 
 // GET CURRENT USER
 
-  Future getCurrentUser() async{
+  Future getCurrentUser() async {
     return await _auth.currentUser();
   }
 
@@ -53,8 +51,6 @@ class AuthService {
 //    await currentUser.reload();
 //  }
 //
-
-
 
   ///////////////////////
 
