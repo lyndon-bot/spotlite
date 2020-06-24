@@ -2,6 +2,10 @@ class User {
   final String uid;
 
   User({this.uid});
+
+  String getUser() {
+    return this.uid;
+  }
 }
 
 class UserData {

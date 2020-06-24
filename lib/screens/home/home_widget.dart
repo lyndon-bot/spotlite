@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:stopliteapp/models/stoplite.dart';
 import 'package:stopliteapp/screens/home/stoplite_list.dart';
 import 'package:stopliteapp/screens/home/profile_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class HomePage extends StatefulWidget {
   // This widget is the home page of your application. It is stateful, meaning
@@ -49,10 +50,13 @@ class _HomePageState extends State<HomePage> {
   Future _scanQR() async {
     try {
       String qrResult = await BarcodeScanner.scan();
-      setState(() {
-        result = qrResult;
-
-        DatabaseService().getUserData(result);
+      setState(() async {
+        final result = qrResult;
+        //print(result);
+        FirebaseAuth _auth = FirebaseAuth.instance;
+        FirebaseUser user = await _auth.currentUser();
+        //print(User().getUser());
+        DatabaseService(uid: user.uid).getUserData(result);
       });
     } on PlatformException catch (ex) {
       if (ex.code == BarcodeScanner.CameraAccessDenied) {

@@ -23,8 +23,8 @@ class DatabaseService {
   }
 
   String uid2;
-
   Future getUserData(user2) async {
+    print(user2);
     return await stopLiteCollection
         .where("qrid", isEqualTo: user2)
         .getDocuments()
@@ -37,11 +37,12 @@ class DatabaseService {
   }
 
   Future createInteraction(user2) async {
-    //print();
+    print('test stuff $uid');
     return await stopLiteCollection2.document().setData({
       'status': 0,
       'user1': "/user/$uid",
       'user2': "/user/$user2",
+      'createdOn': FieldValue.serverTimestamp(),
     });
   }
 
@@ -69,7 +70,7 @@ class DatabaseService {
   }
 
   // get user doc stream
-  Stream<UserData> get userData {
+  Stream<UserData> get user {
     return stopLiteCollection
         .document(uid)
         .snapshots()
