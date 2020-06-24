@@ -12,6 +12,7 @@ import 'package:stopliteapp/models/stoplite.dart';
 import 'package:stopliteapp/screens/home/stoplite_list.dart';
 import 'package:stopliteapp/screens/home/profile_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'notifications.dart';
 
 class HomePage extends StatefulWidget {
   // This widget is the home page of your application. It is stateful, meaning
@@ -116,7 +117,7 @@ class _HomePageState extends State<HomePage> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ProfileView()),
+                      MaterialPageRoute(builder: (context) => notification()),
                     );
                   })
             ],

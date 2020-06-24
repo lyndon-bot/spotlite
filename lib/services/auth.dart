@@ -7,11 +7,11 @@ class AuthService {
 
 ////
 //test//
-  void inputData() async {
+  /* void inputData() async {
     final FirebaseUser user = await _auth.currentUser();
     final uid = user.uid;
     // input the data into firestore???
-  }
+  }*/
 
   ////
   //create user object based on fb user
@@ -28,11 +28,11 @@ class AuthService {
 ////////////////////////////
   //more test
   //
-  Stream<String> get onAuthStateChanged => _auth.onAuthStateChanged.map(
+  /*Stream<String> get onAuthStateChanged => _auth.onAuthStateChanged.map(
         (FirebaseUser user) => user?.uid,
       );
-
-  ///GET User ID
+*/
+  /* ///GET User ID
   Future<String> getCurrentUID() async {
     return (await _auth.currentUser()).uid;
   }
@@ -42,7 +42,7 @@ class AuthService {
   Future getCurrentUser() async {
     return await _auth.currentUser();
   }
-
+*/
 //
 //  Future updateUserName(String name, FirebaseUser currentUser) async{
 //    var userUpdateInfo = UserUpdateInfo();

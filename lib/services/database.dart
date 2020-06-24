@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:stopliteapp/models/stoplite.dart';
 import 'package:stopliteapp/models/user.dart';
+import 'package:provider/provider.dart';
 import 'package:stopliteapp/services/auth.dart';
 
 class DatabaseService {
@@ -58,19 +60,26 @@ class DatabaseService {
   List<Stoplite> _stopliteListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Stoplite(
-          name: doc.data['name'] ?? '',
-          strength: doc.data['strength'] ?? 0,
-          sugars: doc.data['sugars'] ?? '0');
+          createdOn: doc.data['createdOn'] ?? '',
+          status: doc.data['status'] ?? 0,
+          user2: doc.data['user1'] ?? '0');
     }).toList();
   }
   // get stoplite stream
 
   Stream<List<Stoplite>> get stoplites {
-    return stopLiteCollection.snapshots().map(_stopliteListFromSnapshot);
+    //final user = Provider.of<User>;
+    print(uid);
+
+    return stopLiteCollection2
+        .where("status", isEqualTo: 0)
+        .where("user2", isEqualTo: "/user/$uid")
+        .snapshots()
+        .map(_stopliteListFromSnapshot);
   }
 
   // get user doc stream
-  Stream<UserData> get user {
+  Stream<UserData> get userData {
     return stopLiteCollection
         .document(uid)
         .snapshots()

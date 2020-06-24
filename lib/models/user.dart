@@ -4,7 +4,7 @@ class User {
   User({this.uid});
 
   String getUser() {
-    return this.uid;
+    return uid;
   }
 }
 

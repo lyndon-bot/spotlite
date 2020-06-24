@@ -14,10 +14,10 @@ class StopliteTile extends StatelessWidget {
         child: ListTile(
           leading: CircleAvatar(
             radius: 25.0,
-            backgroundColor: Colors.brown[stoplite.strength],
+            //backgroundColor: Colors.brown[stoplite.strength],
           ),
-          title: Text(stoplite.name),
-          subtitle: Text('Takes ${stoplite.sugars} sugar(s)'),
+          title: Text(stoplite.createdOn.toString()),
+          subtitle: Text('Takes ${stoplite.user2} sugar(s)'),
         ),
       ),
     );

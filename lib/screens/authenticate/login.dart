@@ -80,6 +80,7 @@ class _LoginState extends State<Login> {
             });
             dynamic result =
                 await _auth.signInWithEmailAndPassword(email, password);
+            print("user logged in UID is ${result.uid}");
             if (result == null) {
               setState(() {
                 error = 'Could not sign in with those credentials';
