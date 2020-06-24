@@ -11,6 +11,7 @@ class User {
 class UserData {
   final String uid;
   final String qrid;
+  final String username;
 
-  UserData({this.uid, this.qrid});
+  UserData({this.uid, this.qrid, this.username});
 }

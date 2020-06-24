@@ -17,10 +17,12 @@ class DatabaseService {
   final CollectionReference stopLiteCollection2 =
       Firestore.instance.collection('interactions');
 
-  Future updateUserData() async {
+  Future updateUserData(String username) async {
+    print(username);
     return await stopLiteCollection.document(uid).setData({
       'uid': uid,
       'qrid': uid,
+      'username': username,
     });
   }
 
@@ -53,6 +55,7 @@ class DatabaseService {
     return UserData(
       uid: uid,
       qrid: snapshot.data['qrid'],
+      username: snapshot.data['username'],
     );
   }
 
@@ -62,13 +65,12 @@ class DatabaseService {
       return Stoplite(
           createdOn: doc.data['createdOn'] ?? '',
           status: doc.data['status'] ?? 0,
-          user2: doc.data['user1'] ?? '0');
+          user1: doc.data['user1'] ?? '0');
     }).toList();
   }
   // get stoplite stream
 
   Stream<List<Stoplite>> get stoplites {
-    //final user = Provider.of<User>;
     print(uid);
 
     return stopLiteCollection2

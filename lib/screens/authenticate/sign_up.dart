@@ -38,7 +38,8 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    final UsernameField = TextFormField(
+    final usernameField = TextFormField(
+      validator: (val) => val.isEmpty ? 'enter an username' : null,
       onChanged: (val) {
         setState(() => username = val);
       },
@@ -101,8 +102,9 @@ class _SignUpPageState extends State<SignUpPage> {
             setState(() {
               loading = true;
             });
-            dynamic result =
-                await _auth.registerWithEmailAndPassword(email, password);
+            print(password);
+            dynamic result = await _auth.registerWithEmailAndPassword(
+                email, password, username);
             print(result);
             if (result == null) {
               setState(() {
@@ -142,7 +144,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             ),
                           ),
                           SizedBox(height: 25.0),
-                          //UsernameField,
+                          usernameField,
                           SizedBox(height: 25.0),
                           emailField,
                           SizedBox(height: 25.0),
