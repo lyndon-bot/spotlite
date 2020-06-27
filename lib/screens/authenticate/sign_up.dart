@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-//import 'file:///C:/Users/lyndon%20bowen/AndroidStudioProjects/stopliteapp/lib/screens/authenticate/login.dart';
-import '..//authenticate/login.dart';
-//import 'file:///C:/Users/lyndon%20bowen/AndroidStudioProjects/stopliteapp/lib/screens/home/home_widget.dart';
-import '../home/home_widget.dart'; // relative import?
 import 'package:stopliteapp/services/auth.dart';
 import 'package:stopliteapp/shared/loading.dart';
 
@@ -78,7 +74,7 @@ class _SignUpPageState extends State<SignUpPage> {
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
-    final cPasswordField = TextFormField(
+    /*final cPasswordField = TextFormField(
       onChanged: (val) {
         setState(() => cpassword = val);
       },
@@ -89,7 +85,7 @@ class _SignUpPageState extends State<SignUpPage> {
           hintText: "Confirm Password",
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-    );
+    );*/
     final loginButon = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),

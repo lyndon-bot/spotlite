@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-//import 'package:qr_flutter/qr_flutter.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
-import 'package:stopliteapp/models/user.dart';
 import 'package:stopliteapp/screens/home/profile_view.dart';
 import 'dart:async';
 import 'package:stopliteapp/services/database.dart';
 import 'package:stopliteapp/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:stopliteapp/models/stoplite.dart';
-import 'package:stopliteapp/screens/home/stoplite_list.dart';
-import 'package:stopliteapp/screens/home/profile_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'notifications.dart';
 
@@ -53,7 +49,7 @@ class _HomePageState extends State<HomePage> {
       String qrResult = await BarcodeScanner.scan();
       setState(() async {
         final result = qrResult;
-        //print(result);
+        print("Scanned data: from home_widget $result");
         FirebaseAuth _auth = FirebaseAuth.instance;
         FirebaseUser user = await _auth.currentUser();
         //print(User().getUser());

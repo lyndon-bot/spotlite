@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stopliteapp/models/stoplite.dart';
-import 'package:provider/provider.dart';
-import 'package:stopliteapp/models/user.dart';
-import 'package:stopliteapp/services/database.dart';
+import 'notifications.dart';
 
 class StopliteTile extends StatelessWidget {
   final Stoplite stoplite;

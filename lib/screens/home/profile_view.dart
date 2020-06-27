@@ -1,9 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:stopliteapp/widgets/provider_widget.dart';
-import 'package:stopliteapp/screens/home/home_widget.dart';
-import 'package:stopliteapp/services/auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProfileView extends StatelessWidget {
@@ -18,14 +15,14 @@ class ProfileView extends StatelessWidget {
             if (!snapshot.hasData) return Text('Loading data..');
             return Column(
               children: <Widget>[
-                Text('username: ' + snapshot.data.documents[0]['name'],
+                /*Text('username: ' + snapshot.data.documents[0]['name'],
                     style: new TextStyle(fontSize: 15.0),
                     textAlign: TextAlign.center),
                 Text(
                     'strength: ' +
                         snapshot.data.documents[0]['strength'].toString(),
                     style: new TextStyle(fontSize: 15.0),
-                    textAlign: TextAlign.center),
+                    textAlign: TextAlign.center), */
                 FutureBuilder(
                     future: FirebaseAuth.instance.currentUser(),
                     builder: (context, AsyncSnapshot<FirebaseUser> snapshot) {

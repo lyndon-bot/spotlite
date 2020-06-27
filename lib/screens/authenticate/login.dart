@@ -1,9 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import 'package:stopliteapp/screens/authenticate/sign_up.dart';
-//import 'file:///C:/Users/lyndon%20bowen/AndroidStudioProjects/stopliteapp/lib/screens/home/home_widget.dart';
-import '../home/home_widget.dart';
 import 'package:stopliteapp/services/auth.dart';
 import 'package:stopliteapp/shared/loading.dart';
 
@@ -80,7 +77,7 @@ class _LoginState extends State<Login> {
             });
             dynamic result =
                 await _auth.signInWithEmailAndPassword(email, password);
-            print("user logged in UID is ${result.uid}");
+            //print("user logged in UID is ${result.uid}");
             if (result == null) {
               setState(() {
                 error = 'Could not sign in with those credentials';

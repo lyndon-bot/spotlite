@@ -7,6 +7,7 @@ import 'package:stopliteapp/screens/authenticate/authenticate.dart';
 class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // user definition
     final user = Provider.of<User>(context);
     //final userData = Provider.of<UserData>(context);
 

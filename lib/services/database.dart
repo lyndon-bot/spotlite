@@ -1,10 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:stopliteapp/models/stoplite.dart';
 import 'package:stopliteapp/models/user.dart';
-import 'package:provider/provider.dart';
-import 'package:stopliteapp/services/auth.dart';
 
 class DatabaseService {
   //collection reference
@@ -28,7 +24,7 @@ class DatabaseService {
 
   String uid2;
   Future getUserData(user2) async {
-    print(user2);
+    print("Get_user_data Recives data $user2");
     return await stopLiteCollection
         .where("qrid", isEqualTo: user2)
         .getDocuments()
@@ -42,6 +38,7 @@ class DatabaseService {
 
   Future createInteraction(user2) async {
     print('test stuff $uid');
+    print('user scanned $user2');
     return await stopLiteCollection2.document().setData({
       'status': 0,
       'user1': "/user/$uid",
