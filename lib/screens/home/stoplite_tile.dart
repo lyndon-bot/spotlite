@@ -1,6 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:stopliteapp/models/stoplite.dart';
-import 'notifications.dart';
+import 'package:stopliteapp/services/database.dart';
 
 class StopliteTile extends StatelessWidget {
   final Stoplite stoplite;
@@ -19,7 +20,7 @@ class StopliteTile extends StatelessWidget {
               radius: 25.0,
               backgroundColor: Colors.grey,
             ),
-            title: Text('${stoplite.user1}'),
+            title: Text('${stoplite.id}'),
             //subtitle: Text('Takes ${stoplite.user2} sugar(s)'),
             trailing: Column(children: <Widget>[
               Container(
@@ -29,7 +30,10 @@ class StopliteTile extends StatelessWidget {
                   color: Colors.red,
                   height: 30,
                   onPressed: () {
-                    print(stoplite.status);
+                    Firestore.instance
+                        .collection('interactions')
+                        .document(stoplite.id)
+                        .updateData({'status': '-1'});
                   },
                   child: Text(
                     "Deny",
@@ -42,7 +46,12 @@ class StopliteTile extends StatelessWidget {
                 child: MaterialButton(
                   color: Colors.green,
                   height: 30,
-                  onPressed: () {},
+                  onPressed: () {
+                    Firestore.instance
+                        .collection('interactions')
+                        .document(stoplite.id)
+                        .updateData({'status': '1'});
+                  },
                   child: Text(
                     "Accept",
                     textAlign: TextAlign.center,

@@ -5,6 +5,7 @@ class Stoplite {
   final String user1;
   final int status;
   final String username;
+  final String id;
 
-  Stoplite({this.createdOn, this.user1, this.status, this.username});
+  Stoplite({this.createdOn, this.user1, this.status, this.username, this.id});
 }

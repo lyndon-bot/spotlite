@@ -62,7 +62,8 @@ class DatabaseService {
       return Stoplite(
           createdOn: doc.data['createdOn'] ?? '',
           status: doc.data['status'] ?? 0,
-          user1: doc.data['user1'] ?? '0');
+          user1: doc.data['user1'] ?? '0',
+          id: doc.documentID ?? '0');
     }).toList();
   }
   // get stoplite stream
