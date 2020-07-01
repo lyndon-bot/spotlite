@@ -13,6 +13,7 @@ class DatabaseService {
   final CollectionReference stopLiteCollection2 =
       Firestore.instance.collection('interactions');
 
+  // updating user database where the user gets the uid, qrid
   Future updateUserData(String username) async {
     print(username);
     return await stopLiteCollection.document(uid).setData({
@@ -48,6 +49,7 @@ class DatabaseService {
   }
 
 // user data from snapshots
+  // takes snapshot and creates a specific data
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserData(
       uid: uid,
@@ -79,6 +81,7 @@ class DatabaseService {
   }
 
   // get user doc stream
+  // creating a stream to the userclass
   Stream<UserData> get userData {
     return stopLiteCollection
         .document(uid)
