@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stopliteapp/models/user.dart';
 import 'package:stopliteapp/services/database.dart';
+import 'dart:async';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -24,6 +25,14 @@ class AuthService {
   Stream<User> get user {
     return _auth.onAuthStateChanged.map(_userFromFireBaseUser);
   }
+
+
+  getUID() async {
+    final FirebaseUser user = await _auth.currentUser();
+    final uid = user.uid;
+    return  uid;
+  }
+
 
 ////////////////////////////
   //more test
@@ -71,6 +80,7 @@ class AuthService {
     try {
       AuthResult result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
+      // using firebases current user and converting into our own user
       FirebaseUser user = result.user;
       return _userFromFireBaseUser(user);
     } catch (error) {
@@ -87,7 +97,9 @@ class AuthService {
           email: email.trim(), password: password);
       FirebaseUser user = result.user;
       //create a new document for user with the uid
+      // passing in username and userid to database
       await DatabaseService(uid: user.uid).updateUserData(username);
+
       return _userFromFireBaseUser(user);
     } catch (error) {
       print(error.toString());
